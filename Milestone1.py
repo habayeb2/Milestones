@@ -29,3 +29,41 @@ def hamming_dist(dna1, dna2):
 firstdna = "GAGCCTACTAACGGGAT"
 seconddna = "CATCGTAATGACGGCCT"
 print(hamming_dist(firstdna, seconddna))
+
+def count_dom_phenotype(genotypes):
+    offspring = 0
+    n = 1
+    for couples in genotypes:
+        if n <= 3:
+            offspring += couples*2
+            n += 1
+        elif n == 4:
+            offspring += couples*1.5
+            n += 1
+        elif n == 5:
+            offspring += couples*1
+            n += 1
+        elif n == 6:
+            offspring += 0
+    return offspring 
+
+def mendels_law(hom, het, rec):
+    dominant = 0
+    n = (hom+het+rec)
+    outcomes = 0
+    while n != 0:
+        outcomes += n - 1
+        n += -1
+    homodom = hom
+    while homodom != 0:
+        dominant += homodom - 1
+        homodom += -1
+    hetero = het
+    while hetero != 0:
+        dominant += .75*(hetero - 1)
+        hetero += -1
+    dominant += hom*het*1
+    dominant += hom*rec*1
+    dominant += het*rec*0.5
+    prob = dominant/outcomes
+    return prob

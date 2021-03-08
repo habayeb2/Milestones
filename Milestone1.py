@@ -51,3 +51,19 @@ def hamming_dist(dna1, dna2):
 firstdna = "GAGCCTACTAACGGGAT"
 seconddna = "CATCGTAATGACGGCCT"
 print(hamming_dist(firstdna, seconddna))
+
+def GC_content(dna_list):   #
+    highest_content = [0,0]
+    for i in range(0,len(dna_list)):
+       dna_list[i].upper()
+       G_count = dna_list[i].count("G")     #amount of G in DNA
+       C_count = dna_list[i].count("C")     #amount of C in DNA
+       GC_count = G_count+C_count      
+       GC_content = GC_count/len(dna_list[i])   # percent make up of GC in DNA
+       if GC_content > highest_content[1]:      #if the new GC content calculated is greater than the previous recorded, it replaces it.
+            highest_content[1] = GC_content
+       else:
+           continue
+    return highest_content
+
+

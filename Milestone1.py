@@ -27,12 +27,28 @@ def dna2rna(dna):
             rna = rna + 'C'
     return rna
 
+def GC_content(dna_list):       #This function takes a list of DNA strands and counts the amount of guanine and cytosine in it
+    highest_content = [0,0]         #baseline to add to as the max GC content measured gets higher
+    for i in range(0,len(dna_list)):       # for the length of a dna string
+       dna_list[i].upper()      #
+       G_count = dna_list[i].count("G") #counts the amount of G in the DNA
+       C_count = dna_list[i].count("C") #counts the amount of C in the string
+       GC_count = G_count+C_count
+       GC_content = GC_count/len(dna_list[i])       #gives the percent of the DNA made of guanine and cystosine
+       if GC_content > highest_content[1]:      #if the new GC content is higher than the previously measured GC content, 
+            highest_content[0] = i      # the index of the DNA sequence with the highest GC content
+            highest_content[1] = GC_content     #The percent make-up of said DNA sequence
+       else:
+           continue
+    return highest_content
+
 def rna2codon(triplet):
     genetic_code = {
         'UUU': 'F', 'UUC': 'F', 'UUA': 'L', 'UUG': 'L',        'CUU': 'L', 'CUC': 'L', 'CUA': 'L', 'CUG': 'L',
         'AUU': 'I', 'AUC': 'I', 'AUA': 'I', 'AUG': 'M',        'GUU': 'V', 'GUC': 'V', 'GUA': 'V', 'GUG': 'V',
 
         'UCU': 'S', 'UCC': 'S', 'UCA': 'S', 'UCG': 'S',        'CCU': 'P', 'CCC': 'P', 'CCA': 'P', 'CCG': 'P',
+        
         'ACU': 'T', 'ACC': 'T', 'ACA': 'T', 'ACG': 'T',        'GCU': 'A', 'GCC': 'A', 'GCA': 'A', 'GCG': 'A',
 
         'UAU': 'Y', 'UAC': 'Y', 'UAA': '*', 'UAG': '*',        'CAU': 'H', 'CAC': 'H', 'CAA': 'Q', 'CAG': 'Q',

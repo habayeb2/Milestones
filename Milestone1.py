@@ -41,9 +41,9 @@ def dna2rna(dna):
     return rna
 
 def reverse_complement(dna):
-    dna = dna[::-1]
+    dna = dna[::-1] #reverses the dna string
     fdna = ''
-    for symbol in dna:
+    for symbol in dna: #Replaces the symbols
         if symbol == 'A':
             fdna = fdna + 'T'
         elif symbol == 'T':
@@ -116,7 +116,7 @@ def rna2codon(triplet):
         return "Invalid"
 
 def locate_substring(dna_snippet, dna):
-    def recurse(index_found, start):
+    def recurse(index_found, start): 
         ind = dna.find(dna_snippet, start)
         if ind !=-1:
             return recurse(index_found + [ind], ind + 1 )

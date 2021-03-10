@@ -164,7 +164,7 @@ def count_dom_phenotype(genotypes):
     return offspring
 
 def source_rna(protein):
-    rna_combos = 1      #acts as a starting point for the math when finding combos
+    rna_combos = 3      #acts as a starting point for the math when finding combos
     rna_counter = []    #houses the number of occurences of each protein based on its key
     for n in range (0,len(protein)):        #for every individual protein in the string
         counter = 0     #the number of occurences of each protein in the dictionary

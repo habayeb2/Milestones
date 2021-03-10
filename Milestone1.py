@@ -79,6 +79,12 @@ def mendels_law(hom, het, rec):
     prob = dominant/outcomes
     return prob
 
+def fibonacci_rabbits(n,k):
+    if n == 0 or n ==1:
+        return n
+    else:
+        return fibonacci_rabbits(n-1, k) + k * fibonacci_rabbits(n-2, k)
+
 def GC_content(dna_list):       #This function takes a list of DNA strands and counts the amount of guanine and cytosine in it
     highest_content = [0,0]         #baseline to add to as the max GC content measured gets higher
     for i in range(0,len(dna_list)):       # for the length of a dna string

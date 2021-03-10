@@ -100,7 +100,7 @@ def GC_content(dna_list):       #This function takes a list of DNA strands and c
            continue
     return highest_content
 
-def rna2codon(triplet):
+def rna2codontri(triplet):
     genetic_code = {
         'UUU': 'F', 'UUC': 'F', 'UUA': 'L', 'UUG': 'L',        'CUU': 'L', 'CUC': 'L', 'CUA': 'L', 'CUG': 'L',
         'AUU': 'I', 'AUC': 'I', 'AUA': 'I', 'AUG': 'M',        'GUU': 'V', 'GUC': 'V', 'GUA': 'V', 'GUG': 'V',
@@ -121,31 +121,30 @@ def rna2codon(triplet):
     else:
         return "Invalid"
 
+def rna2codon(triplets):
+    triplets1 = []
+    amino = ''
+    for i in range ( 0,int( len( triplets ) / 3 ) ):
+        triplets1.append(triplets[ 3*i:3*i+3] )
+    for triplet in triplets1:
+        amino = amino + rna2codontri(triplet)
+    return amino
+
 def locate_substring(dna_snippet, dna):
-    def recurse(index_found, start): 
+    def recurse(index_found, start): #finding and listing the index
         ind = dna.find(dna_snippet, start)
         if ind !=-1:
-            return recurse(index_found + [ind], ind + 1 )
+            return recurse(index_found + [ind], ind + 1 ) # Moves on to the next part of the dna string to search for the snippet
         else:
             return index_found
     return recurse([], 0)
 
-#Test locate_substring
-subdna = "ATAT"
-dnalist = "GATATATGCATATACTT"
-print(locate_substring(subdna, dnalist))
-
 def hamming_dist(dna1, dna2):
     count = 0
-    for i in range(len(dna1)):
-        if (dna1[i] != dna2[i]):
+    for i in range(len(dna1)): 
+        if (dna1[i] != dna2[i]): #For every index, check if values are equal.
             count += 1
     return count
-#Test hamming_dist     
-firstdna = "GAGCCTACTAACGGGAT"
-seconddna = "CATCGTAATGACGGCCT"
-print(hamming_dist(firstdna, seconddna))
-
 
 def count_dom_phenotype(genotypes):
     offspring = 0
@@ -179,14 +178,6 @@ def source_rna(protein):
             rna_combos = rna_combos*x
     return rna_combos
 
-def rna2codons(triplets):
-    triplets1 = []
-    amino = ''
-    for i in range ( 0,int( len( triplets ) / 3 ) ):
-        triplets1.append(triplets[ 3*i:3*i+3] )
-    for triplet in triplets1:
-        amino = amino + rna2codon(triplet)
-    return amino
 
 def splice_rna(dna, intron_list):
     exons = dna
@@ -195,5 +186,5 @@ def splice_rna(dna, intron_list):
     for intron in intron_list: 
         exons = exons.replace(intron, "") #Removing introns from the string
     rna = dna2rna(exons)
-    protein = rna2codons(rna)
+    protein = rna2codon(rna)
     return protein

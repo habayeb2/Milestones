@@ -175,7 +175,7 @@ def source_rna(protein):
                 counter += 1
         rna_counter.append(counter)     #adds the counted occurences to the list
     for x in rna_counter:       #takes all the stored number of occurences and multiplies them together
-            rna_combos = rna_combos*x
+            rna_combos = rna_combos*x %1000000
     return rna_combos
 
 

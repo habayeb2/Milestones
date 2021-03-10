@@ -20,11 +20,12 @@ genetic_code = {
 
 def dna_count(dna):
     dna = dna.upper()
-    count_A = dna.count('A')
-    count_C = dna.count('C')
-    count_G = dna.count('G')
-    count_T = dna.count('T')
-    return count_A,count_C,count_G,count_T
+    dna_count ={}
+    dna_count["A"] = dna.count('A')
+    dna_count["C"] = dna.count('C')
+    dna_count["G"] = dna.count('G')
+    dna_count["T"] = dna.count('T')
+    return dna_count
 
 def dna2rna(dna):
     dna = dna.upper()

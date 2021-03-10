@@ -4,6 +4,19 @@ Created on Mon Mar  8 01:03:24 2021
 
 @author: karee
 """
+genetic_code = {
+        'UUU': 'F', 'UUC': 'F', 'UUA': 'L', 'UUG': 'L',        'CUU': 'L', 'CUC': 'L', 'CUA': 'L', 'CUG': 'L',
+        'AUU': 'I', 'AUC': 'I', 'AUA': 'I', 'AUG': 'M',        'GUU': 'V', 'GUC': 'V', 'GUA': 'V', 'GUG': 'V',
+
+        'UCU': 'S', 'UCC': 'S', 'UCA': 'S', 'UCG': 'S',        'CCU': 'P', 'CCC': 'P', 'CCA': 'P', 'CCG': 'P',
+        'ACU': 'T', 'ACC': 'T', 'ACA': 'T', 'ACG': 'T',        'GCU': 'A', 'GCC': 'A', 'GCA': 'A', 'GCG': 'A',
+
+        'UAU': 'Y', 'UAC': 'Y', 'UAA': '*', 'UAG': '*',        'CAU': 'H', 'CAC': 'H', 'CAA': 'Q', 'CAG': 'Q',
+        'AAU': 'N', 'AAC': 'N', 'AAA': 'K', 'AAG': 'K',        'GAU': 'D', 'GAC': 'D', 'GAA': 'E', 'GAG': 'E',
+
+        'UGU': 'C', 'UGC': 'C', 'UGA': '*', 'UGG': 'W',        'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'CGG': 'R',
+        'AGU': 'S', 'AGC': 'S', 'AGA': 'R', 'AGG': 'R',        'GGU': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G',
+    }
 
 def dna_count(dna):
     dna = dna.upper()
@@ -26,6 +39,27 @@ def dna2rna(dna):
         elif symbol == 'G':
             rna = rna + 'C'
     return rna
+
+def mendels_law(hom, het, rec):
+    dominant = 0
+    n = (hom+het+rec)
+    outcomes = 0
+    while n != 0:
+        outcomes += n - 1
+        n += -1
+    hom1 = hom
+    while hom1 != 0:
+        dominant += hom1 - 1
+        hom1 += -1
+    het1 = het
+    while het1 != 0:
+        dominant += .75*(het1 - 1)
+        het1 += -1
+    dominant += hom*het*1
+    dominant += hom*rec*1
+    dominant += het*rec*0.5
+    prob = dominant/outcomes
+    return prob
 
 def GC_content(dna_list):       #This function takes a list of DNA strands and counts the amount of guanine and cytosine in it
     highest_content = [0,0]         #baseline to add to as the max GC content measured gets higher
@@ -106,40 +140,6 @@ def count_dom_phenotype(genotypes):
             offspring += 0
     return offspring
 
-def mendels_law(hom, het, rec):
-    dominant = 0
-    n = (hom+het+rec)
-    outcomes = 0
-    while n != 0:
-        outcomes += n - 1
-        n += -1
-    hom1 = hom
-    while hom1 != 0:
-        dominant += hom1 - 1
-        hom1 += -1
-    het1 = het
-    while het1 != 0:
-        dominant += .75*(het1 - 1)
-        het1 += -1
-    dominant += hom*het*1
-    dominant += hom*rec*1
-    dominant += het*rec*0.5
-    prob = dominant/outcomes
-    return prob
-
-genetic_code = {
-        'UUU': 'F', 'UUC': 'F', 'UUA': 'L', 'UUG': 'L',        'CUU': 'L', 'CUC': 'L', 'CUA': 'L', 'CUG': 'L',
-        'AUU': 'I', 'AUC': 'I', 'AUA': 'I', 'AUG': 'M',        'GUU': 'V', 'GUC': 'V', 'GUA': 'V', 'GUG': 'V',
-
-        'UCU': 'S', 'UCC': 'S', 'UCA': 'S', 'UCG': 'S',        'CCU': 'P', 'CCC': 'P', 'CCA': 'P', 'CCG': 'P',
-        'ACU': 'T', 'ACC': 'T', 'ACA': 'T', 'ACG': 'T',        'GCU': 'A', 'GCC': 'A', 'GCA': 'A', 'GCG': 'A',
-
-        'UAU': 'Y', 'UAC': 'Y', 'UAA': '*', 'UAG': '*',        'CAU': 'H', 'CAC': 'H', 'CAA': 'Q', 'CAG': 'Q',
-        'AAU': 'N', 'AAC': 'N', 'AAA': 'K', 'AAG': 'K',        'GAU': 'D', 'GAC': 'D', 'GAA': 'E', 'GAG': 'E',
-
-        'UGU': 'C', 'UGC': 'C', 'UGA': '*', 'UGG': 'W',        'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'CGG': 'R',
-        'AGU': 'S', 'AGC': 'S', 'AGA': 'R', 'AGG': 'R',        'GGU': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G',
-    }
 def source_rna(protein):
     rna_combos = 1      #acts as a starting point for the math when finding combos
     rna_counter = []    #houses the number of occurences of each protein based on its key

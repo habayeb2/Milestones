@@ -32,13 +32,13 @@ def dna2rna(dna):
     rna = ''
     for symbol in dna:
         if symbol == 'A':
-            rna = rna + 'U'
-        elif symbol == 'T':
             rna = rna + 'A'
+        elif symbol == 'T':
+            rna = rna + 'U'
         elif symbol == 'C':
-            rna = rna + 'G'
-        elif symbol == 'G':
             rna = rna + 'C'
+        elif symbol == 'G':
+            rna = rna + 'G'
     return rna
 
 def reverse_complement(dna):

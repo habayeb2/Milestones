@@ -178,3 +178,22 @@ def source_rna(protein):
     for x in rna_counter:       #takes all the stored number of occurences and multiplies them together
             rna_combos = rna_combos*x
     return rna_combos
+
+def rna2codons(triplets):
+    triplets1 = []
+    amino = ''
+    for i in range ( 0,int( len( triplets ) / 3 ) ):
+        triplets1.append(triplets[ 3*i:3*i+3] )
+    for triplet in triplets1:
+        amino = amino + rna2codon(triplet)
+    return amino
+
+def splice_rna(dna, intron_list):
+    exons = dna
+    rna = ''
+    protein = ''
+    for intron in intron_list: 
+        exons = exons.replace(intron, "") #Removing introns from the string
+    rna = dna2rna(exons)
+    protein = rna2codons(rna)
+    return protein

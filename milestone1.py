@@ -129,7 +129,9 @@ def rna2codon(triplets):
         triplets1.append(triplets[ 3*i:3*i+3] )
     for triplet in triplets1:
         amino = amino + rna2codontri(triplet)
-    return amino
+    amino1 = amino.replace('*', '')
+    return amino1
+
 
 def locate_substring(dna_snippet, dna):
     def recurse(index_found, start): #finding and listing the index

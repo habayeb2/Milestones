@@ -40,6 +40,24 @@ def dna2rna(dna):
             rna = rna + 'C'
     return rna
 
+def reverse_complement(dna):
+    dna = dna[::-1]
+    fdna = ''
+    for symbol in dna:
+        if symbol == 'A':
+            fdna = fdna + 'T'
+        elif symbol == 'T':
+            fdna = fdna + 'A'
+        elif symbol == 'C':
+            fdna = fdna + 'G'
+        elif symbol == 'G':
+            fdna = fdna + 'C'
+    return fdna
+
+#Test for reverse_complement
+testDna = "AAAACCCGGT"
+print(reverse_complement(testDna))
+
 def mendels_law(hom, het, rec):
     dominant = 0
     n = (hom+het+rec)

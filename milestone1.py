@@ -189,5 +189,5 @@ def splice_rna(dna, intron_list):
     for intron in intron_list: 
         exons = exons.replace(intron, "") #Removing introns from the string
     rna = dna2rna(exons)
-    protein = rna2codon(rna)
+    protein = rna2codon(rna) #converts the rna string into a protein string
     return protein

@@ -131,7 +131,7 @@ def rna2codon(triplets):
         if rna2codontri(triplet) == '*':
             break
         amino = amino + rna2codontri(triplet)
-    return amino1
+    return amino
 
 
 def locate_substring(dna_snippet, dna):

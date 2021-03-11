@@ -128,8 +128,9 @@ def rna2codon(triplets):
     for i in range ( 0,int( len( triplets ) / 3 ) ):
         triplets1.append(triplets[ 3*i:3*i+3] )
     for triplet in triplets1:
+        if rna2codontri(triplet) == '*':
+            break
         amino = amino + rna2codontri(triplet)
-    amino1 = amino.replace('*', '')
     return amino1
 
 

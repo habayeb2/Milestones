@@ -89,15 +89,15 @@ def fibonacci_rabbits(n,k):
         
 def GC_content(dna_list):       #This function takes a list of DNA strands and counts the amount of guanine and cytosine in it
     highest_content = [0,0]         #baseline to add to as the max GC content measured gets higher
-    for i in range(0,len(dna_list)):       # for the length of a dna string
+    for i in range(len(dna_list)):       # for the length of a dna string
        dna_list[i].upper()      #
-       G_count = dna_list[i].count("G") #counts the amount of G in the DNA
-       C_count = dna_list[i].count("C") #counts the amount of C in the string
+       G_count = dna_list[i].count('G') #counts the amount of G in the DNA
+       C_count = dna_list[i].count('C') #counts the amount of C in the string
        GC_count = G_count+C_count
-       GC_content = GC_count/len(dna_list[i])       #gives the percent of the DNA made of guanine and cystosine
+       GC_content = GC_count/len(dna_list[i]) * 100      #gives the percent of the DNA made of guanine and cystosine
        if GC_content > highest_content[1]:      #if the new GC content is higher than the previously measured GC content, 
             highest_content[0] = i      # the index of the DNA sequence with the highest GC content
-            highest_content[1] = GC_content     #The percent make-up of said DNA sequence
+            highest_content[1] = GC_content      #The percent make-up of said DNA sequence
        else:
            continue
     return highest_content

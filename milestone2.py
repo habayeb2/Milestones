@@ -8,8 +8,8 @@ def find_splice(dna_motif, dna):
     indexarray = []
     for i in range(0, len(dna_motif)):
         index = dna.find(dna_motif[i], index)
-        indexarray.append(index + 1)
-        index += 2
+        indexarray.append(index)
+        index += 1
     return indexarray
 
 def perfect_match(rna):
@@ -34,3 +34,4 @@ def random_genome(dna, gc_content):
         perc = perc * (gc_content[i] / 2) ** (dna.count("C"))
         prob.append(math.log10(perc))
     return prob
+

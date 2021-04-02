@@ -1,6 +1,5 @@
 
 # milestone 2
-import math
 
 def find_splice(dna_motif, dna):
     index = 0 
@@ -13,6 +12,7 @@ def find_splice(dna_motif, dna):
     return indexarray
 
 def perfect_match(rna):
+    import math
     rna = rna.upper()
     matches = 0
     if rna.count("A") == rna.count("U") and rna.count("C") == rna.count("G"):
@@ -22,6 +22,7 @@ def perfect_match(rna):
     return matches
 
 def random_genome(dna,gc_content):
+    import math
     dna = dna.upper()
     prob = []
     for i in range(len(gc_content)):

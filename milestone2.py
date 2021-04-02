@@ -9,6 +9,8 @@ def find_splice(dna_motif, dna):
     for i in range(0, len(dna_motif)):
         index = dna.find(dna_motif[i], index)
         indexarray.append(index)
+        if (index == -1):
+            return []
         index += 1
     return indexarray
 
@@ -34,4 +36,3 @@ def random_genome(dna, gc_content):
         perc = perc * (gc_content[i] / 2) ** (dna.count("C"))
         prob.append(math.log10(perc))
     return prob
-

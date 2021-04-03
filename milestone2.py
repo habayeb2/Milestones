@@ -41,7 +41,7 @@ def reverse_complement(s):
     complements = {'A':'T', 'T':'A', 'G':'C', 'C':'G'}
     return ''.join([complements[c] for c in reversed(s)])
 
-def reverse_palindromes(s):
+def rev_palindrome(s):
     results = []
 
     l = len(s)

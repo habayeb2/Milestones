@@ -37,25 +37,29 @@ def random_genome(dna, gc_content):
         prob.append(math.log10(perc))
     return prob
 
-def reverse_complement(s):
-    complements = {'A':'T', 'T':'A', 'G':'C', 'C':'G'}
-    return ''.join([complements[c] for c in reversed(s)])
+def reverse_complement(dna):
+    dna = dna[::-1] #reverses the dna string
+    fdna = ''
+    for symbol in dna: #Replaces the symbols
+        if symbol == 'A':
+            fdna = fdna + 'T'
+        elif symbol == 'T':
+            fdna = fdna + 'A'
+        elif symbol == 'C':
+            fdna = fdna + 'G'
+        elif symbol == 'G':
+            fdna = fdna + 'C'
+    return fdna
 
 def rev_palindrome(s):
-    results = []
-
-    l = len(s)
-
-    for i in range(l):
+    result = []
+    length = len(s)
+    for i in range(length):
         for j in range(4, 9):
-
-            if i + j > l:
+            if i + j > length:
                 continue
-
             s1 = s[i:i+j]
             s2 = reverse_complement(s1)
-
             if s1 == s2:
                 results.append((i, j))
-
     return results

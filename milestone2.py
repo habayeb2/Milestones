@@ -55,7 +55,7 @@ def rev_palindrome(s):
     result = []
     length = len(s)
     for i in range(length):
-        for j in range(4, 9):
+        for j in range(4, 13):
             if i + j > length:
                 continue
             s1 = s[i:i+j]

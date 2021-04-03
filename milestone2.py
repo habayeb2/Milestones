@@ -61,5 +61,5 @@ def rev_palindrome(s):
             s1 = s[i:i+j]
             s2 = reverse_complement(s1)
             if s1 == s2:
-                results.append((i, j))
-    return results
+                result.append((i, j))
+    return result

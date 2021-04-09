@@ -43,7 +43,7 @@ def random_genome(dna, gc_content):
     prob = [] #creates an empty list of possibility
     for i in range(len(gc_content)): #for every value of the content list provided
         perc = 1
-        perc = perc * ((1 - gc_content[i]) / 2) ** (dna.count("A")) #calculates the possibility of a dna sequence, which is dependent on the number of nucleotides and not the order they appear
+        perc = perc * ((1 - gc_content[i]) / 2) ** (dna.count("A")) #calculates the possibility of a dna sequence, dependent on the number of nucleotides, not the order in which they appear
         perc = perc * ((1 - gc_content[i]) / 2) ** (dna.count("T"))
         perc = perc * (gc_content[i] / 2) ** (dna.count("G"))
         perc = perc * (gc_content[i] / 2) ** (dna.count("C"))

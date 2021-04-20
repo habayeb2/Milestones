@@ -14,6 +14,25 @@ def find_splice(dna_motif, dna):
         index += 1                              # adds 1 to index after each iteration to test next letter
     return indexarray
 
+def shared_motif(dna_list):
+    dna_sorted = sorted(dna_list)    #sorts strings of DNA in dna_list from shortest to longest
+    short_dna = dna_sorted[0]        #takes the first string from the sorted dna list and defines it as short_dna
+    rest_dna = dna_sorted[1:]        #rest of dna strings
+    substring = ""
+    for n in range(len(short_dna)):  # iterates one time for each letter in the shortest dna string
+        for m in range(len(short_dna), len(substring) + n, -1):  # iterates backwards from end of shortest string, getting longer with every inrease in n
+            sub1 = short_dna[n:m]    # defines sub1 as the part of the shortest dna string from n to m
+            
+            check = True
+            for sub2 in rest_dna:
+                if sub1 not in sub2:  # This block of logic checks if sub1 is in the other dna strings
+                    check = False
+                    break             # if sub1 isn't in the rest of the strings, we break the for loop and it continues iterating
+            if check:
+                substring = sub1      # if sub1 is in the other strings we define substring as sub1 and we've found the shortest common substring
+                
+    return substring
+
 def get_edges(dna_dict):
     list1 = [] #empty list to store adjacency
     keylist = list(dna_dict.keys()) #Puts the keys of the dictionary into a list to help convert from value to key later
@@ -76,22 +95,3 @@ def rev_palindrome(s):
             if s1 == s2:                 #if it is, add the position and length as a tuple to the output
                 result.append((i, j))
     return result
-
-def shared_motif(dna_list):
-    dna_sorted = sorted(dna_list)    #sorts strings of DNA in dna_list from shortest to longest
-    short_dna = dna_sorted[0]        #takes the first string from the sorted dna list and defines it as short_dna
-    rest_dna = dna_sorted[1:]        #rest of dna strings
-    substring = ""
-    for n in range(len(short_dna)):  # iterates one time for each letter in the shortest dna string
-        for m in range(len(short_dna), len(substring) + n, -1):  # iterates backwards from end of shortest string, getting longer with every inrease in n
-            sub1 = short_dna[n:m]    # defines sub1 as the part of the shortest dna string from n to m
-            
-            check = True
-            for sub2 in rest_dna:
-                if sub1 not in sub2:  # This block of logic checks if sub1 is in the other dna strings
-                    check = False
-                    break             # if sub1 isn't in the rest of the strings, we break the for loop and it continues iterating
-            if check:
-                substring = sub1      # if sub1 is in the other strings we define substring as sub1 and we've found the shortest common substring
-                
-    return substring

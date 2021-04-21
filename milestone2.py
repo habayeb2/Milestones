@@ -24,11 +24,10 @@ def check_sub(short, whole):                 #FOR USE IN shared_motif(dna_list) 
 
 def shared_motif(dna_list):
     sub = ""
-    if len(dna_list[0]) > 0 and len(dna_list) > 1:                            #verifying dna_list is able to have common substrings for its strings
-        for n in range(len(dna_list[0])):                                     #iterates once for each character in the first string of dna_list
-            for m in range(len(dna_list[0]) - n + 1):                         #nested loop: for each character in first string of dna_list, this loop iterates n less times, plus one due to exclusive nature of indexing
-                if check_sub(dna_list[0][n:n+m], dna_list) and m > len(sub):  #uses check_sub function defined above to verify that string found is in other strings of dna_list
-                    sub = dna_list[0][n:n+m]                                  #defines sub as the longest common substring
+    for n in range(len(dna_list[0])):                                     #iterates once for each character in the first string of dna_list
+        for m in range(len(dna_list[0]) - n + 1):                         #nested loop: for each character in first string of dna_list, this loop iterates n less times, plus one due to exclusive nature of indexing
+            if check_sub(dna_list[0][n:n+m], dna_list) and m > len(sub):  #uses check_sub function defined above to verify that string found is in other strings of dna_list
+                sub = dna_list[0][n:n+m]                                  #defines sub as the longest common substring
     return sub
 
 def get_edges(dna_dict):

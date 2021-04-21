@@ -92,3 +92,20 @@ def rev_palindrome(dna):
             if s1 == s2:                 #if it is, add the position and length as a tuple to the output
                 result.append((i, j))
     return result
+
+def assemble_genome(dna_list):
+    base_dna = dna_list[0]
+    i = 1
+    while i < len(dna_list):
+        nextstring = dna_list[i]
+        print("while")
+        for j in range(1, len(dna_list[i])):
+            print("for")
+            if base_dna[len(base_dna) - j: len(base_dna)] == nextstring[1: j+1]:
+                print("if")
+                deletetext = nextstring[1: j+2]
+                next = nextstring.replace(deletetext, "")
+                base_dna = base_dna + next
+                break
+        i = i + 1
+    return base_dna

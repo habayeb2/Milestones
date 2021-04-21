@@ -98,12 +98,9 @@ def assemble_genome(dna_list):
     i = 1
     while i < len(dna_list):
         nextstring = dna_list[i]
-        print("while")
         for j in range(1, len(dna_list[i])):
-            print("for")
             if base_dna[len(base_dna) - j: len(base_dna)] == nextstring[1: j+1]:
-                print("if")
-                deletetext = nextstring[1: j+2]
+                deletetext = nextstring[0: j+1]
                 next = nextstring.replace(deletetext, "")
                 base_dna = base_dna + next
                 break

@@ -80,14 +80,14 @@ def reverse_complement(dna):
             fdna = fdna + 'C'
     return fdna
 
-def rev_palindrome(s):
+def rev_palindrome(dna):
     result = []
-    length = len(s)                      #finds length of input which is a DNA string
+    length = len(dna)                      #finds length of input which is a DNA string
     for i in range(length):              #iterares through length of DNA string
         for j in range(4, 13):           #goes through each letter 4 to 12 times for reverse palindromes of 4 to 12 letters
             if i + j > length:
                 continue
-            s1 = s[i:i+j]
+            s1 = dna[i:i+j]
             s2 = reverse_complement(s1)  #checks to see if reverse complement string is a reverse palindrome, using function defined above
             if s1 == s2:                 #if it is, add the position and length as a tuple to the output
                 result.append((i, j))

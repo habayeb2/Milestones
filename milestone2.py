@@ -15,12 +15,12 @@ def find_splice(dna_motif, dna):
     return indexarray
 
 def shared_motif(dna_list):
-    dna_sorted = sorted(dna_list)    #sorts strings of DNA in dna_list from shortest to longest
+    dna_sorted = sorted(dna_list, key=len)    #sorts strings of DNA in dna_list from shortest to longest
     short_dna = dna_sorted[0]        #takes the first string from the sorted dna list and defines it as short_dna
     rest_dna = dna_sorted[1:]        #rest of dna strings
     substring = ""
     for n in range(len(short_dna)):  # iterates one time for each letter in the shortest dna string
-        for m in range(len(short_dna), len(substring) + n, -1):  # iterates backwards from end of shortest string, getting longer with every inrease in n
+        for m in range(len(short_dna), len(substring) + n + 1, -1):  # iterates backwards from end of shortest string, getting longer with every inrease in n
             sub1 = short_dna[n:m]    # defines sub1 as the part of the shortest dna string from n to m
             
             check = True

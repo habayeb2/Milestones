@@ -14,24 +14,22 @@ def find_splice(dna_motif, dna):
         index += 1                              # adds 1 to index after each iteration to test next letter
     return indexarray
 
+def check_sub(short, whole):                 #FOR USE IN shared_motif(dna_list) DEFINED BELOW
+    if len(whole) == 0 and len(short) == 0:  #makes sure substring has been specified by shared_motif function
+        return False                         
+    for n in range(len(whole)):              #iterates once for each string in dna_list, referred to as "whole" here
+        if short not in whole[n]:            #if substring isn't in the string from dna_list, function refers false
+            return False
+    return True                              #If none of the other specifications failed, returns true, the substring is a common substring
+
 def shared_motif(dna_list):
-    dna_sorted = sorted(dna_list, key=len)    #sorts strings of DNA in dna_list from shortest to longest
-    short_dna = dna_sorted[0]        #takes the first string from the sorted dna list and defines it as short_dna
-    rest_dna = dna_sorted[1:]        #rest of dna strings
-    substring = ""
-    for n in range(len(short_dna)):  # iterates one time for each letter in the shortest dna string
-        for m in range(len(short_dna), len(substring) + n, -1):  # iterates backwards from end of shortest string, getting longer with every inrease in n
-            sub1 = short_dna[n:m]    # defines sub1 as the part of the shortest dna string from n to m
-            
-            check = True
-            for sub2 in rest_dna:
-                if sub1 not in sub2:  # This block of logic checks if sub1 is in the other dna strings
-                    check = False
-                    break             # if sub1 isn't in the rest of the strings, we break the for loop and it continues iterating
-            if check:
-                substring = sub1      # if sub1 is in the other strings we define substring as sub1 and we've found the shortest common substring
-                
-    return substring
+    sub = ""
+    if len(dna_list[0]) > 0 and len(dna_list) > 1:                            #verifying dna_list is able to have common substrings for its strings
+        for n in range(len(dna_list[0])):                                     #iterates once for each character in the first string of dna_list
+            for m in range(len(dna_list[0]) - n + 1):                         #nested loop: for each character in first string of dna_list, this loop iterates n less times, plus one due to exclusive nature of indexing
+                if check_sub(dna_list[0][n:n+m], dna_list) and m > len(sub):  #uses check_sub function defined above to verify that string found is in other strings of dna_list
+                    sub = dna_list[0][n:n+m]                                  #defines sub as the longest common substring
+    return sub
 
 def get_edges(dna_dict):
     list1 = [] #empty list to store adjacency

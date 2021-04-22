@@ -126,7 +126,7 @@ def assemble_genome(dna_list):
                     tmp.sort() #sorts the tmp values
                     for overlap,index in tmp: #for all the values of overlap and indexs of the dictionary 
                         attempt=assembled+dna_list[index][overlap:] #starts adding the overlapping strings to each other to try all combos
-                        nremain=set(remain) #creates a set from the remain values as to not mess with the original set
-                        nremain.remove(index) #removes the index of dna_list already used for testing from the set used
-                        stack.append((attempt,index,nremain))#stores the attempt, the index of the string start at to make it, and the remaining indexes that weren't test yet
+                        reduced=set(remain) #creates a set from the remain values as to not mess with the original set
+                        reduced.remove(index) #removes the index of dna_list already used for testing from the set used
+                        stack.append((attempt,index,reduced))#stores the attempt, the index of the string start at to make it, and the remaining indexes that weren't test yet
         return dna_string

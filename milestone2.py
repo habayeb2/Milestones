@@ -94,15 +94,39 @@ def rev_palindrome(dna):
     return result
 
 def assemble_genome(dna_list):
-    base_dna = dna_list[0]
-    i = 1
-    while i < len(dna_list):
-        nextstring = dna_list[i]
-        for j in range(1, len(dna_list[i])):
-            if base_dna[len(base_dna) - j: len(base_dna)] == nextstring[1: j+1]:
-                deletetext = nextstring[0: j+1]
-                next = nextstring.replace(deletetext, "")
-                base_dna = base_dna + next
-                break
-        i = i + 1
-    return base_dna
+    if len(dna_list)==1: #if there is only one DNA in the list
+        return dna_list[0] #the shortest superstring is just the single dna in the list
+    dic={} #initializes an empty dictionary
+    for i in range(len(dna_list)): #for every DNA string in the list
+        for j in range(len(dna_list)): #for the number of DNA strings in the list
+            if i!=j: # if the j being used doesn't match i, which will happen after one iteration
+                overlap=0 #initializes a value for the amount of overlap between strings
+                for k in range(1,min(len(dna_list[i]),len(dna_list[j]))): #for k values from 1 to the length of shortest string
+                    if dna_list[j][:k]==dna_list[i][-k:]: #if the suffix of the first DNA string matches the prefix of the second
+                        overlap=k
+                dic[(i,j)]=overlap #adds the overlap to the dictionary along with the index of which dna list combo it belongs to
+    if max(dic.values())==0: #if there is no overlap at all
+        return "".join(dna_list) #return the list as a string since there would be no mixing to get the superstring
+    else:
+        dna_string="".join(dna_list) #sets a value to be equal to a string of all the
+        l=len(dna_string) #counts the number of letters/characters in ret
+        stack=[] #initializes an empty list
+        for i,checks in enumerate(dna_list): #gives every part of the dna list a number then for every number and string in the list
+            tmp=set(range(len(dna_list))) # creates a set made up of a the number range from 0 to the length of the dna list
+            tmp.remove(i) #removes the i used from the set 
+            stack.append((checks,i,tmp)) #adds the string from dna_list, its associated index, and the set without the index to know which to test and not to test
+        while stack: 
+            assembled,cur,remain=stack.pop()
+            if len(assembled)<l: #if the length of the string tested at the time is less than the length of the dna_string stored
+                if not remain: 
+                    dna_string=assembled #change the stored dna_string to be the string 
+                    l=len(dna_string) #the length of the supersting being compared to is just all of the dna strings added together without overlap
+                else:
+                    tmp=[[dic[cur,index],index] for index in remain] # [overlap,idx]
+                    tmp.sort() #sorts the tmp values
+                    for overlap,index in tmp: #for all the values of overlap and indexs of the dictionary 
+                        attempt=assembled+dna_list[index][overlap:] #starts adding the overlapping strings to each other to try all combos
+                        nremain=set(remain) #creates a set from the remain values as to not mess with the original set
+                        nremain.remove(index) #removes the index of dna_list already used for testing from the set used
+                        stack.append((attempt,index,nremain))#stores the attempt, the index of the string start at to make it, and the remaining indexes that weren't test yet
+        return dna_string
